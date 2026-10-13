@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IPAS Ceria – Belajar Sains Jadi Seru</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Warna (CSS variables) ===== */
+:root{--bg:#f6faf7;--card:#fff;--tx:#223;--mut:#5b6670;--bd:#e3ebe6;--sh:0 4px 18px rgba(30,60,50,.08);--c1:#23875a;--c2:#2d73bf;--c3:#a86f00;--a:var(--c1);--r:18px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14191a;--card:#1e2527;--tx:#eef3f1;--mut:#a5b2b0;--bd:#2d3739;--sh:0 4px 18px rgba(0,0,0,.3);--c1:#3fbf86;--c2:#5aa5ee;--c3:#e8b030}}
+:root[data-theme="dark"]{--bg:#14191a;--card:#1e2527;--tx:#eef3f1;--mut:#a5b2b0;--bd:#2d3739;--sh:0 4px 18px rgba(0,0,0,.3);--c1:#3fbf86;--c2:#5aa5ee;--c3:#e8b030}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Nunito,system-ui,sans-serif;line-height:1.6;transition:background .3s}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;align-items:center;padding:8px 14px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.15rem;margin-right:auto}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:0}
+.nv,.ic{background:none;color:var(--tx);padding:10px 14px;border-radius:12px;min-height:44px;font-weight:600}
+.nv:hover,.nv.on{background:var(--bd)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 60px;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+h1{font-size:clamp(1.7rem,5vw,2.4rem);margin:.2em 0}
+h2{margin:1.6em 0 .5em;font-size:1.3rem}
+p{margin:.4em 0}
+.mut{color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+.cb{cursor:pointer;border-top:5px solid var(--a);transition:transform .2s;text-align:left;color:var(--tx);width:100%}
+.cb:hover{transform:translateY(-3px)}
+.em{font-size:2rem}
+.btn{background:var(--a);color:#fff;padding:12px 22px;border-radius:14px;font-weight:800;min-height:46px;margin:6px 6px 0 0;transition:filter .2s}
+.btn:hover{filter:brightness(1.1)}
+.btn.o{background:none;color:var(--tx);border:2px solid var(--bd)}
+.bar{height:12px;background:var(--bd);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--a);width:0;transition:width .4s}
+.fact{background:#fff6d6;color:#4a3b00;border-radius:var(--r);padding:16px}
+:root[data-theme="dark"] .fact{background:#3a3315;color:#fbeeb0}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:2px solid var(--bd);border-radius:14px;padding:13px 16px;margin:8px 0;min-height:48px;font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--a)}
+.opt.ok{border-color:#23a05f;background:rgba(35,160,95,.15)}
+.opt.no{border-color:#d9534f;background:rgba(217,83,79,.15)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mc{aspect-ratio:1;border-radius:14px;background:var(--a);color:#fff;font-size:1.5rem;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(.8rem,3.5vw,1.2rem);padding:4px}
+.mc.f{background:var(--card);color:var(--tx);border:2px solid var(--a)}
+.mc.d{background:rgba(35,160,95,.2);color:var(--tx);border:2px solid #23a05f}
+.chip{display:inline-block;background:var(--card);border:2px solid var(--bd);border-radius:12px;padding:10px 16px;margin:5px;font-weight:700;cursor:grab;color:var(--tx);min-height:44px}
+.chip.sel{border-color:var(--a);box-shadow:0 0 0 3px var(--bd)}
+.bk{min-height:120px;border:2px dashed var(--a);border-radius:var(--r);padding:12px;background:var(--card)}
+.bk h3{margin:0 0 6px}
+.shake{animation:sk .3s}
+@keyframes sk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.badge{text-align:center;opacity:.35;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none}
+.badge .em{font-size:2.6rem}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:12px 20px;border-radius:14px;font-weight:700;z-index:30;animation:fade .3s}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:40;animation:fall 2.2s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+
+/* ===== Tampilan v2 ===== */
+body{background-color:var(--bg);background-image:radial-gradient(900px 420px at 90% -5%,color-mix(in srgb,var(--c2) 13%,transparent),transparent),radial-gradient(700px 380px at -5% 15%,color-mix(in srgb,var(--c1) 12%,transparent),transparent);background-attachment:fixed}
+header{backdrop-filter:blur(8px)}
+.nv.on{background:color-mix(in srgb,var(--c1) 20%,transparent);font-weight:800}
+.card{border-radius:24px}
+.hero{display:flex;gap:18px;align-items:center;padding:22px;border-radius:28px;border:1px solid var(--bd);background:linear-gradient(135deg,color-mix(in srgb,var(--a) 18%,var(--card)),var(--card));margin-bottom:6px}
+.hero .em{flex:none;width:76px;height:76px;border-radius:24px;background:var(--card);box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+.hero h1{margin:0;font-size:clamp(1.35rem,4.5vw,2rem);line-height:1.25}
+h2{display:flex;align-items:center;gap:12px}
+h2:after{content:"";flex:1;height:2px;background:var(--bd);border-radius:2px}
+.cb .em{width:58px;height:58px;border-radius:18px;background:color-mix(in srgb,var(--a) 16%,var(--card));display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.art{border-left:6px solid var(--a);border-radius:8px 24px 24px 8px}
+.art h3{margin:0 0 6px;color:var(--a);font-size:1.1rem}
+.art p{margin:0;line-height:1.85}
+.art b{color:var(--tx)}
+.fact{border-radius:24px;border-left:6px solid #e8b030}
+/* ===== Fitur seru ===== */
+[hidden]{display:none!important}
+#mas{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+#mbtn{width:56px;height:56px;border-radius:50%;font-size:1.8rem;background:var(--card);box-shadow:var(--sh);border:2px solid var(--bd);animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+#mb{background:var(--card);border:2px solid var(--bd);border-radius:16px;padding:10px 14px;max-width:230px;box-shadow:var(--sh);font-weight:700;font-size:.9rem}
+.diag{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;text-align:center}
+.diag div{display:flex;flex-direction:column;align-items:center;min-width:80px}
+.diag span{font-size:2.2rem}.diag small{font-weight:700;font-size:.8rem}.diag b{color:var(--a);font-size:1.4rem}
+.fact p{margin:.3em 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🔬 IPAS Ceria</div>
+  <nav id="nav"></nav>
+  <span id="xp" style="font-weight:800"></span><button class="ic" id="sd" aria-label="Suara">🔊</button><button class="ic" id="tg" aria-label="Ganti mode terang atau gelap">🌓</button>
+</header>
+<main id="app"></main>
+<div id="mas"><div id="mb" hidden></div><button id="mbtn" aria-label="Maskot Robi" onclick="mas()">🤖</button></div>
+
+<script>
+/* ============ DATA MATERI & SOAL (mudah diedit) ============ */
+// Format soal: [pertanyaan, [pilihan...], indeks jawaban benar, penjelasan]
+const CH=[
+{n:1,t:"Makhluk Hidup dan Lingkungannya",e:"🌿",c:"var(--c1)",
+ goals:["Menyebutkan ciri-ciri makhluk hidup","Mengelompokkan makhluk hidup","Menjelaskan rantai makanan dan adaptasi","Menjaga kelestarian lingkungan"],
+ cards:[["🌱","Ciri Makhluk Hidup","Bernapas, butuh makan, tumbuh, bergerak, berkembang biak, dan peka terhadap rangsangan."],
+ ["🐾","Klasifikasi","Makhluk hidup dibagi menjadi hewan, tumbuhan, dan mikroorganisme (bakteri, jamur, dll)."],
+ ["🏞️","Habitat","Habitat adalah tempat hidup makhluk hidup, misalnya laut untuk ikan dan hutan untuk harimau."],
+ ["🔗","Rantai Makanan","Rumput (produsen) → belalang (konsumen) → katak → ular. Pengurai menguraikan sisa makhluk hidup."],
+ ["🐪","Adaptasi","Penyesuaian diri terhadap lingkungan, seperti punuk unta atau paruh burung yang berbeda-beda."],
+ ["♻️","Menjaga Alam","Buang sampah pada tempatnya, tanam pohon, hemat air, dan jangan berburu hewan langka."]],
+ ex:["Kucing makan ikan lalu tumbuh besar (butuh makan dan tumbuh).","Tanaman di jendela menghadap cahaya (peka rangsangan).","Daun jatuh membusuk menjadi tanah subur karena pengurai."],
+ fact:"Satu sendok teh tanah subur bisa berisi lebih dari satu miliar bakteri! 🦠",
+ q:[
+["Kamu menanam biji kacang, beberapa hari kemudian muncul tunas. Ciri makhluk hidup yang terlihat adalah...",["Tumbuh","Bernapas","Berpindah tempat","Mengeluarkan bunyi"],0,"Munculnya tunas dan bertambah besar menunjukkan ciri tumbuh.",1],
+["Manakah yang BUKAN makhluk hidup?",["Batu","Jamur","Lumut","Bakteri"],0,"Batu tidak bernapas, tidak tumbuh, dan tidak berkembang biak.",1],
+["Putri malu menutup daunnya saat disentuh. Ini menunjukkan makhluk hidup...",["Peka terhadap rangsangan","Berkembang biak","Makan","Berpindah tempat"],0,"Menanggapi sentuhan adalah tanggapan terhadap rangsangan.",1],
+["Urutan rantai makanan yang benar adalah...",["Padi → tikus → ular → elang","Elang → ular → tikus → padi","Tikus → padi → ular → elang","Ular → tikus → elang → padi"],0,"Rantai makanan dimulai dari produsen (padi), lalu konsumen tingkat 1, 2, dan seterusnya.",2],
+["Tanda panah dalam rantai makanan menunjukkan...",["Arah perpindahan energi","Siapa yang lebih kuat","Siapa yang lebih besar","Arah hewan berjalan"],0,"Panah menunjukkan aliran energi dari yang dimakan ke yang memakan.",2],
+["Jika semua ular di sawah punah, yang paling mungkin terjadi adalah...",["Jumlah tikus meningkat","Jumlah tikus berkurang","Padi bertambah banyak","Tidak ada perubahan"],0,"Tanpa pemangsa, populasi tikus tidak terkendali dan dapat merusak panen.",3],
+["Ayam memakan biji-bijian dan cacing. Ayam termasuk...",["Omnivora","Herbivora","Karnivora","Produsen"],0,"Omnivora memakan tumbuhan sekaligus hewan.",1],
+["Paruh burung kolibri panjang dan runcing untuk...",["Mengisap nektar dalam bunga","Mencabik daging","Memecah biji keras","Menyaring air"],0,"Bentuk paruh disesuaikan dengan makanannya.",2],
+["Beruang kutub berbulu tebal dan memiliki lapisan lemak. Ini adaptasi terhadap...",["Suhu yang sangat dingin","Daerah kering","Air payau","Hutan lebat"],0,"Bulu dan lemak menahan panas tubuh di kutub.",1],
+["Kaktus berdaun kecil seperti duri agar...",["Mengurangi penguapan air","Menarik serangga","Menangkap mangsa","Menyerap banyak cahaya"],0,"Di gurun air sangat langka sehingga penguapan harus ditekan.",2],
+["Tempe dibuat dengan bantuan jamur. Jamur termasuk...",["Mikroorganisme yang bermanfaat","Hewan","Tumbuhan berbunga","Benda mati"],0,"Jamur Rhizopus mengubah kedelai menjadi tempe.",2],
+["Benalu menempel di pohon dan mengambil makanannya. Hubungan ini disebut...",["Parasitisme","Mutualisme","Komensalisme","Predasi"],0,"Benalu diuntungkan, pohon dirugikan.",3],
+["Ikan badut berlindung di anemon, anemon terlindung dari pemangsa oleh ikan badut. Hubungan ini...",["Mutualisme","Parasitisme","Persaingan","Netral"],0,"Kedua makhluk hidup sama-sama diuntungkan.",2],
+["Hutan bakau penting karena...",["Mencegah abrasi dan menjadi tempat hidup ikan","Membuat air laut asin","Menambah sampah","Menghalangi cahaya matahari"],0,"Akar bakau menahan ombak dan menjadi tempat berkembang biak ikan.",2],
+["Prinsip 3R dalam mengelola sampah adalah...",["Reduce, Reuse, Recycle","Read, Write, Run","Rebut, Rusak, Rawat","Reduce, Remove, Return"],0,"Kurangi, gunakan kembali, dan daur ulang.",1]
+]},
+{n:2,t:"Zat dan Perubahannya",e:"🧪",c:"var(--c2)",
+ goals:["Membedakan padat, cair, dan gas","Menjelaskan perubahan wujud","Membedakan perubahan fisika dan kimia","Mengenal campuran dan larutan"],
+ cards:[["🧊","Wujud Zat","Padat (bentuk tetap), cair (mengikuti wadah), dan gas (memenuhi ruang)."],
+ ["🔍","Sifat Zat","Zat punya massa, menempati ruang, dan bisa dikenali dari warna, bau, dan kekerasan."],
+ ["🔄","Perubahan Wujud","Mencair, membeku, menguap, mengembun, menyublim (padat → gas), dan mendeposisi."],
+ ["✂️","Perubahan Fisika","Zat berubah bentuk tetapi jenisnya sama, misalnya es mencair atau kertas digunting."],
+ ["🔥","Perubahan Kimia","Terbentuk zat baru, misalnya kayu terbakar, besi berkarat, atau makanan basi."],
+ ["🥤","Campuran & Larutan","Campuran bisa dipisahkan. Larutan tercampur merata, seperti gula dalam air."]],
+ ex:["Es batu di gelas mencair saat siang hari.","Embun di pagi hari adalah uap air yang mengembun.","Telur digoreng tidak bisa kembali seperti semula (perubahan kimia)."],
+ fact:"Kapur barus bisa langsung menjadi gas tanpa mencair lebih dulu. Itu disebut menyublim! 💨",
+ q:[
+["Air dituang dari gelas ke botol. Yang tidak berubah adalah...",["Banyaknya (volume) air","Bentuk air","Wadah air","Letak air"],0,"Zat cair berubah bentuk mengikuti wadah, tetapi volumenya tetap.",1],
+["Balon bisa ditiup mengembang karena gas...",["Mengisi seluruh ruang yang tersedia","Memiliki bentuk tetap","Lebih berat dari udara","Tidak punya massa"],0,"Partikel gas bergerak bebas dan menyebar memenuhi ruang.",1],
+["Es batu dipanaskan terus-menerus. Urutan wujudnya adalah...",["Padat → cair → gas","Gas → cair → padat","Cair → padat → gas","Padat → gas → cair"],0,"Es (padat) mencair menjadi air, lalu menguap menjadi uap air.",1],
+["Pakaian basah menjadi kering saat dijemur karena air...",["Menguap","Mengembun","Membeku","Menyublim"],0,"Air berubah menjadi uap karena panas matahari.",1],
+["Lilin meleleh lalu mengeras kembali saat dingin. Perubahan ini termasuk...",["Perubahan fisika","Perubahan kimia","Reaksi pembakaran","Perubahan zat baru"],0,"Zatnya tetap lilin, hanya wujudnya yang berubah.",2],
+["Ciri-ciri terjadinya perubahan kimia adalah...",["Terbentuk zat baru","Hanya bentuk berubah","Hanya ukuran berubah","Hanya wujud berubah"],0,"Biasanya disertai gelembung, perubahan warna, bau, atau panas.",2],
+["Manakah yang termasuk perubahan kimia?",["Susu menjadi basi","Mentega meleleh","Air mendidih","Garam dilarutkan"],0,"Susu basi menghasilkan zat baru yang bau dan rasanya asam.",1],
+["Besi yang berkarat tidak bisa kembali seperti semula karena...",["Terbentuk zat baru bernama karat","Hanya berubah wujud","Hanya berubah bentuk","Besi menjadi gas"],0,"Perubahan kimia umumnya sulit dikembalikan.",2],
+["Minyak goreng dituang ke air dan mengapung tanpa bercampur. Campuran ini...",["Bukan larutan","Larutan","Zat tunggal","Gas"],0,"Larutan harus tercampur merata, sedangkan minyak tetap terpisah.",2],
+["Cara memisahkan campuran pasir dan air adalah...",["Penyaringan","Penguapan","Penyulingan","Penyublimasian"],0,"Pasir tertahan di saringan, sedangkan air lolos.",1],
+["Cara mendapatkan garam dari air laut adalah...",["Menguapkan airnya","Menyaringnya","Mendinginkannya","Mengaduknya"],0,"Air menguap dan garam tertinggal, seperti pada ladang garam.",2],
+["Titik-titik air di dinding gelas berisi es terbentuk karena...",["Uap air di udara mengembun","Air gelas merembes","Es menguap","Gelas bocor"],0,"Uap air bertemu permukaan dingin lalu berubah menjadi cair.",2],
+["Kapur barus di lemari lama-lama habis tanpa menjadi basah. Peristiwa ini disebut...",["Menyublim","Mencair","Mengembun","Membeku"],0,"Zat padat langsung menjadi gas.",2],
+["Saat air dipanaskan, partikel-partikel airnya akan...",["Bergerak lebih cepat dan saling menjauh","Diam tak bergerak","Saling mendekat rapat","Menghilang"],0,"Panas memberi energi sehingga partikel bergerak lebih cepat.",3],
+["Kertas yang dibakar tidak bisa kembali menjadi kertas karena...",["Terjadi perubahan kimia yang menghasilkan abu","Hanya terjadi perubahan fisika","Kertas berubah wujud","Kertas mengembun"],0,"Pembakaran membentuk zat baru seperti abu dan asap.",3]
+]},
+{n:3,t:"Energi dan Perubahannya",e:"⚡",c:"var(--c3)",
+ goals:["Menyebutkan bentuk-bentuk energi","Menjelaskan perubahan bentuk energi","Membedakan sumber energi","Menerapkan hemat energi"],
+ cards:[["🔥","Bentuk Energi","Energi panas, cahaya, bunyi, listrik, dan gerak (kinetik)."],
+ ["🔁","Perubahan Energi","Energi tidak bisa dibuat atau dimusnahkan, hanya berubah bentuk."],
+ ["☀️","Terbarukan","Tidak habis: matahari, angin, air, dan panas bumi."],
+ ["🛢️","Tidak Terbarukan","Bisa habis: minyak bumi, batu bara, dan gas alam."],
+ ["💡","Cahaya & Bunyi","Cahaya merambat lurus. Bunyi berasal dari benda yang bergetar."],
+ ["🔌","Hemat Energi","Matikan lampu dan alat listrik yang tidak dipakai, cabut charger, pakai lampu LED."]],
+ ex:["Kipas angin: energi listrik menjadi energi gerak.","Panel surya: energi cahaya menjadi energi listrik.","Baterai senter: energi kimia → listrik → cahaya."],
+ fact:"Cahaya matahari butuh sekitar 8 menit untuk sampai ke Bumi! 🌍",
+ q:[
+["Lampu pijar yang menyala mengubah energi listrik menjadi...",["Cahaya dan panas","Bunyi dan gerak","Kimia dan gerak","Gerak saja"],0,"Selain cahaya, lampu pijar juga terasa panas.",1],
+["Kipas angin mengubah energi listrik menjadi...",["Energi gerak","Energi cahaya","Energi bunyi","Energi kimia"],0,"Baling-baling bergerak berputar.",1],
+["Lampu sepeda menyala dari dinamo yang diputar roda. Perubahan energinya...",["Gerak → listrik → cahaya","Listrik → gerak → cahaya","Cahaya → gerak → listrik","Panas → bunyi → cahaya"],0,"Dinamo mengubah gerak roda menjadi listrik.",2],
+["Tubuh kita butuh makan karena makanan menyimpan energi...",["Kimia yang diubah menjadi gerak dan panas","Listrik yang menjadi cahaya","Bunyi yang menjadi gerak","Cahaya yang menjadi bunyi"],0,"Energi dari makanan dipakai untuk bergerak dan menjaga suhu tubuh.",2],
+["Panel surya (PLTS) mengubah...",["Cahaya matahari menjadi listrik","Panas menjadi bunyi","Listrik menjadi cahaya","Angin menjadi cahaya"],0,"Sel surya menangkap cahaya dan menghasilkan listrik.",1],
+["Kelompok yang seluruhnya sumber energi terbarukan adalah...",["Air, angin, matahari","Minyak bumi, angin, air","Batu bara, gas alam, matahari","Gas alam, minyak bumi, angin"],0,"Air, angin, dan matahari terus tersedia secara alami.",2],
+["Minyak bumi disebut tidak terbarukan karena...",["Pembentukannya butuh jutaan tahun","Tidak bisa dibakar","Hanya ada di laut","Tidak berguna"],0,"Pemakaian jauh lebih cepat daripada pembentukannya.",2],
+["PLTA memanfaatkan aliran air untuk menghasilkan listrik. Perubahan energinya adalah...",["Gerak → listrik","Listrik → gerak","Panas → listrik","Cahaya → bunyi"],0,"Air yang mengalir memutar turbin dan generator.",2],
+["Bunyi tidak dapat merambat di...",["Ruang hampa","Udara","Air","Besi"],0,"Bunyi membutuhkan zat perantara untuk merambat.",2],
+["Petir terlihat dulu, baru terdengar gemuruhnya, karena...",["Cahaya merambat lebih cepat daripada bunyi","Bunyi merambat lebih cepat","Mata lebih peka dari telinga","Petir bersuara pelan"],0,"Kecepatan cahaya jauh lebih besar daripada kecepatan bunyi.",3],
+["Bayangan benda terbentuk karena cahaya...",["Merambat lurus dan terhalang benda","Dapat berbelok","Dipantulkan bunyi","Menembus semua benda"],0,"Cahaya tidak bisa menembus benda gelap sehingga terbentuk bayangan.",2],
+["Sendok logam yang dicelupkan di sup panas ikut menjadi panas. Panas berpindah secara...",["Konduksi (hantaran)","Radiasi","Konveksi","Evaporasi"],0,"Panas merambat melalui benda padat tanpa benda ikut berpindah.",3],
+["Bola di puncak bukit menggelinding turun. Energi yang berubah adalah...",["Energi posisi menjadi energi gerak","Energi gerak menjadi energi posisi","Energi listrik menjadi cahaya","Energi bunyi menjadi panas"],0,"Makin rendah posisinya, makin besar energi geraknya.",3],
+["Senter menyala dari baterai. Perubahan energinya adalah...",["Kimia → listrik → cahaya","Cahaya → listrik → kimia","Gerak → kimia → cahaya","Panas → bunyi → cahaya"],0,"Baterai menyimpan energi kimia.",2],
+["Tindakan hemat energi yang tepat adalah...",["Mencabut charger yang tidak dipakai dan memakai lampu LED","Membiarkan TV menyala","Membuka kulkas lama-lama","Menyalakan semua lampu"],0,"Alat yang tersambung tetap memakai listrik walau tidak dipakai.",1]
+]}
+];
+
+/* ============ PENJELASAN LENGKAP TIAP BAB (mudah diedit) ============ */
+CH[0].long=[
+["Apa itu makhluk hidup?","Makhluk hidup adalah segala sesuatu yang memiliki kehidupan. Ciri-cirinya antara lain <b>bernapas</b>, <b>membutuhkan makanan</b>, <b>tumbuh</b>, <b>bergerak</b>, <b>berkembang biak</b>, dan <b>peka terhadap rangsangan</b>. Tumbuhan juga bergerak, misalnya mengarahkan daun ke cahaya, hanya saja gerakannya lambat. Benda mati seperti batu tidak memiliki ciri-ciri tersebut."],
+["Pengelompokan makhluk hidup","Para ilmuwan mengelompokkan makhluk hidup agar mudah dipelajari. Kelompok besarnya adalah <b>hewan</b>, <b>tumbuhan</b>, dan <b>mikroorganisme</b>. Hewan dibagi menjadi hewan bertulang belakang (vertebrata) seperti ikan, burung, dan mamalia, serta tidak bertulang belakang (invertebrata) seperti cacing dan serangga. Tumbuhan dibagi menjadi tumbuhan berbiji dan tidak berbiji seperti lumut dan paku."],
+["Habitat dan adaptasi","Habitat adalah tempat hidup makhluk hidup yang menyediakan makanan, air, dan perlindungan. Agar bertahan, makhluk hidup melakukan <b>adaptasi</b>. Ada adaptasi bentuk tubuh (paruh burung, kaki bebek berselaput), adaptasi fungsi tubuh (kelenjar garam pada penyu laut), dan adaptasi perilaku (burung bermigrasi saat musim dingin). Makhluk hidup yang tidak mampu beradaptasi dapat punah."],
+["Rantai makanan dan jaring-jaring makanan","Rantai makanan menunjukkan perpindahan energi dari satu makhluk hidup ke makhluk hidup lain. Dimulai dari <b>produsen</b> (tumbuhan hijau), lalu <b>konsumen</b> tingkat 1 (herbivora), konsumen tingkat 2 dan 3 (karnivora atau omnivora), dan diakhiri <b>pengurai</b> yang mengembalikan zat hara ke tanah. Beberapa rantai makanan yang saling berhubungan membentuk jaring-jaring makanan. Jika satu makhluk hidup hilang, keseimbangan seluruh jaring-jaring ikut terganggu."],
+["Interaksi dan menjaga kelestarian lingkungan","Makhluk hidup saling berinteraksi. Pada <b>mutualisme</b> keduanya untung (lebah dan bunga), pada <b>parasitisme</b> satu pihak untung dan pihak lain rugi (benalu dan pohon), dan pada <b>predasi</b> pemangsa memakan mangsanya. Manusia punya tanggung jawab menjaga lingkungan dengan menerapkan <b>3R</b> (Reduce, Reuse, Recycle), menanam pohon, menghemat air, dan tidak merusak habitat hewan."]
+];
+CH[1].long=[
+["Mengenal zat dan wujudnya","Zat adalah segala sesuatu yang memiliki massa dan menempati ruang. Zat tersusun dari partikel-partikel yang sangat kecil. Pada <b>zat padat</b>, partikel tersusun rapat dan hanya bergetar sehingga bentuk dan volumenya tetap. Pada <b>zat cair</b>, partikel agak renggang dan dapat bergeser sehingga bentuknya mengikuti wadah. Pada <b>gas</b>, partikel sangat renggang dan bergerak bebas sehingga memenuhi seluruh ruang."],
+["Perubahan wujud zat","Perubahan wujud terjadi saat zat menerima atau melepas panas. Padat menjadi cair disebut <b>mencair</b> (es mencair pada 0 °C). Cair menjadi gas disebut <b>menguap</b> (air mendidih pada 100 °C). Gas menjadi cair disebut <b>mengembun</b>, cair menjadi padat disebut <b>membeku</b>, padat langsung menjadi gas disebut <b>menyublim</b>, dan gas langsung menjadi padat disebut <b>mengkristal</b> atau mendeposisi. Siklus air di alam adalah contoh nyata perubahan wujud."],
+["Perubahan fisika dan perubahan kimia","Pada <b>perubahan fisika</b>, jenis zat tidak berubah, hanya bentuk, ukuran, atau wujudnya, dan biasanya dapat dikembalikan, misalnya es mencair atau kertas digunting. Pada <b>perubahan kimia</b>, terbentuk zat baru yang sifatnya berbeda dan umumnya sulit dikembalikan, misalnya kayu terbakar menjadi abu, besi berkarat, dan makanan membusuk. Tanda perubahan kimia: muncul gelembung gas, perubahan warna, bau, atau suhu."],
+["Campuran dan larutan","Campuran terbentuk ketika dua zat atau lebih bercampur tanpa membentuk zat baru dan masing-masing mempertahankan sifatnya. Campuran dapat <b>homogen</b> (merata, disebut larutan, seperti teh manis) atau <b>heterogen</b> (tidak merata, seperti air dan pasir). Campuran dapat dipisahkan dengan <b>penyaringan</b> (pasir dan air), <b>penguapan</b> (garam dari air laut), <b>penyulingan</b>, atau <b>pengayakan</b> (kerikil dan pasir)."],
+["Zat dalam kehidupan sehari-hari","Pengetahuan tentang zat sangat berguna. Memasak adalah perubahan kimia, sedangkan membuat es batu dan menjemur pakaian adalah perubahan fisika. Garam dapur dibuat dengan menguapkan air laut di ladang garam. Memahami sifat zat juga membantu kita memilih bahan yang tepat, misalnya panci dari logam karena menghantarkan panas dengan baik, dan gagangnya dari plastik karena tidak mudah panas."]
+];
+CH[2].long=[
+["Apa itu energi?","Energi adalah kemampuan untuk melakukan usaha atau menyebabkan perubahan. Tanpa energi, kita tidak dapat bergerak, lampu tidak menyala, dan tumbuhan tidak bisa tumbuh. Energi bersifat kekal: <b>tidak dapat diciptakan atau dimusnahkan</b>, hanya dapat berubah dari satu bentuk ke bentuk lain. Satuan energi adalah joule (J)."],
+["Bentuk-bentuk energi","Ada banyak bentuk energi. <b>Energi panas</b> membuat benda terasa hangat. <b>Energi cahaya</b> membuat kita dapat melihat. <b>Energi bunyi</b> berasal dari getaran. <b>Energi listrik</b> menggerakkan peralatan rumah. <b>Energi gerak (kinetik)</b> dimiliki benda yang bergerak. Ada juga <b>energi kimia</b> pada makanan dan baterai, serta <b>energi potensial</b> pada benda yang berada di tempat tinggi."],
+["Perubahan bentuk energi","Hampir semua alat bekerja dengan mengubah energi. Setrika mengubah listrik menjadi panas, kipas angin mengubah listrik menjadi gerak, radio mengubah listrik menjadi bunyi, dan panel surya mengubah cahaya menjadi listrik. Tubuh kita pun mengubah energi kimia dari makanan menjadi energi gerak dan panas. Dalam setiap perubahan, sebagian energi biasanya terbuang sebagai panas."],
+["Sumber energi","Sumber energi <b>terbarukan</b> tersedia terus-menerus, yaitu matahari, angin, air, panas bumi, dan biomassa, serta ramah lingkungan. Sumber energi <b>tidak terbarukan</b> seperti minyak bumi, batu bara, dan gas alam (bahan bakar fosil) terbentuk selama jutaan tahun dan akan habis jika terus dipakai. Pembakarannya juga menghasilkan polusi dan gas rumah kaca yang menyebabkan pemanasan global."],
+["Panas, cahaya, dan bunyi","Panas berpindah dengan tiga cara: <b>konduksi</b> (lewat benda padat, seperti sendok logam di sup panas), <b>konveksi</b> (lewat aliran zat cair atau gas, seperti air mendidih), dan <b>radiasi</b> (tanpa perantara, seperti panas matahari). Cahaya merambat lurus, dapat dipantulkan, dan dibiaskan. Bunyi memerlukan zat perantara dan tidak dapat merambat di ruang hampa."],
+["Hemat energi","Menghemat energi berarti menggunakan energi seperlunya. Matikan lampu dan alat listrik saat tidak dipakai, cabut charger dari stopkontak, gunakan lampu LED, dan manfaatkan cahaya matahari pada siang hari. Berjalan kaki atau bersepeda untuk jarak dekat juga menghemat bahan bakar. Hemat energi mengurangi biaya, memperlambat habisnya sumber energi, dan menjaga lingkungan."]
+];
+
+// Game Klasifikasi: [nama, [kelompok A, B, (C)], [[item, indeks kelompok]...]]
+const CLS=[["Hewan / Tumbuhan",["Hewan","Tumbuhan"],[["Kucing",0],["Mawar",1],["Ikan",0],["Padi",1],["Burung",0],["Jagung",1]]],
+["Padat / Cair / Gas",["Padat","Cair","Gas"],[["Batu",0],["Susu",1],["Udara",2],["Kayu",0],["Minyak",1],["Uap air",2]]],
+["Energi",["Terbarukan","Tak terbarukan"],[["Matahari",0],["Angin",0],["Batu bara",1],["Minyak bumi",1],["Air terjun",0],["Gas alam",1]]]];
+// Memory: [emoji, istilah]
+const MEM=[["🌱","Produsen"],["🐄","Herbivora"],["💧","Cair"],["🔥","Panas"],["☀️","Terbarukan"],["🍄","Pengurai"]];
+// Tebak Cepat: [pernyataan, benar?]
+const TF=[["Tumbuhan membuat makanan sendiri",1],["Es mencair adalah perubahan kimia",0],["Matahari adalah energi terbarukan",1],["Gas memiliki bentuk tetap",0],["Bunyi berasal dari getaran",1],["Jamur termasuk pengurai",1],["Minyak bumi tidak akan habis",0],["Embun terbentuk dari uap air yang mengembun",1],["Cahaya merambat zig-zag",0],["Kayu terbakar menghasilkan zat baru",1],["Ikan paus hidup di gurun",0],["Kipas angin mengubah listrik menjadi gerak",1],["Gula dalam air membentuk larutan",1],["Kucing termasuk tumbuhan",0],["Mematikan lampu itu hemat energi",1],["Air membeku menjadi gas",0]];
+const BADGES=[["🌱","Penjelajah Alam","Selesaikan quiz Bab 1",s=>s.best[0]!=null],["🧪","Ilmuwan Cilik","Selesaikan quiz Bab 2",s=>s.best[1]!=null],["⚡","Pakar Energi","Selesaikan quiz Bab 3",s=>s.best[2]!=null],["🏆","Skor Sempurna","Dapat nilai sempurna",s=>Object.values(s.best).some(v=>v==NQ)],["🎮","Gamer Sains","Mainkan 4 game",s=>Object.keys(s.games).length>=4],["🚀","Juara Cepat","Skor ≥ 10 di Tebak Cepat",s=>s.fast>=10],["🔥","Rajin Beruntun","5 jawaban benar beruntun",s=>s.bs>=5],["🎯","Pejuang Harian","Selesaikan tantangan harian",s=>s.daily]];
+
+
+/* ============ KONTEN SERU: eksperimen, mitos/fakta, diagram, fakta ============ */
+CH[0].x={facts:["Gurita memiliki tiga jantung dan darahnya berwarna biru! 🐙","Jamur ternyata lebih dekat kekerabatannya dengan hewan daripada dengan tumbuhan 🍄"],
+exp:["Tumbuhan Mencari Cahaya","biji kacang hijau, kapas, gelas bening, kotak sepatu yang diberi satu lubang kecil",["Letakkan kapas basah dan biji kacang hijau di dalam gelas","Masukkan gelas ke kotak sepatu, lubang menghadap jendela","Siram kapas setiap hari selama 5-7 hari","Amati: tunasnya tumbuh condong ke arah lubang cahaya!"]],
+myth:[["Tumbuhan tidak bernapas.",0,"Tumbuhan juga bernapas: menyerap oksigen dan melepas karbon dioksida. Saat fotosintesis, barulah ia menghasilkan oksigen."],["Paus adalah ikan.",0,"Paus adalah mamalia: bernapas dengan paru-paru dan menyusui anaknya."],["Lebah membantu bunga berkembang biak.",1,"Saat mengisap nektar, lebah memindahkan serbuk sari sehingga terjadi penyerbukan."]],
+diag:[["🌾","Padi (produsen)"],["🐀","Tikus"],["🐍","Ular"],["🦅","Elang"],["🍄","Pengurai"]]};
+CH[1].x={facts:["Es mengapung karena es lebih ringan daripada air cair. Air adalah zat yang unik! 🧊","Kaca jendela dibuat dari pasir yang dilelehkan pada suhu sangat tinggi 🪟"],
+exp:["Larutan atau Bukan?","3 gelas bening berisi air, gula, pasir, minyak goreng, sendok",["Isi tiap gelas dengan air yang sama banyak","Masukkan satu sendok gula, pasir, dan minyak ke gelas yang berbeda","Aduk semuanya selama setengah menit","Amati mana yang tercampur merata (larutan) dan mana yang tidak"]],
+myth:[["Asap putih dari air mendidih adalah uap air.",0,"Uap air tidak terlihat. Yang tampak putih adalah titik-titik air kecil hasil uap yang mengembun."],["Kayu terbakar adalah perubahan kimia.",1,"Terbentuk zat baru, yaitu abu, asap, dan gas."],["Partikel zat padat diam tidak bergerak sama sekali.",0,"Partikel zat padat tetap bergetar di tempatnya."]],
+diag:[["🌊","Laut menguap"],["☁️","Uap mengembun jadi awan"],["🌧️","Hujan turun"],["🏞️","Air mengalir ke laut"]]};
+CH[2].x={facts:["Petir bisa sekitar lima kali lebih panas daripada permukaan Matahari ⚡","Bunyi merambat lebih cepat di dalam air daripada di udara 🌊"],
+exp:["Tangan Penghasil Panas","kedua telapak tanganmu",["Gosokkan kedua telapak tangan dengan cepat selama 10 detik","Rasakan perubahan suhunya","Tempelkan ke pipi: terasa hangat!","Itu energi gerak yang berubah menjadi energi panas"]],
+myth:[["Energi bisa habis sepenuhnya.",0,"Energi tidak hilang, hanya berubah bentuk, misalnya menjadi panas yang menyebar."],["Matahari adalah sumber energi terbarukan.",1,"Cahaya dan panas matahari tersedia terus-menerus."],["Bunyi bisa merambat di ruang hampa.",0,"Bunyi butuh zat perantara seperti udara, air, atau benda padat."]],
+diag:[["🔋","Energi kimia (baterai)"],["⚡","Energi listrik"],["💡","Cahaya dan panas"]]};
+const FAKTA=["Jantungmu berdetak sekitar 100.000 kali setiap hari! ❤️","Cahaya matahari butuh sekitar 8 menit untuk sampai ke Bumi ☀️","Gurita punya tiga jantung 🐙","Bunyi merambat lebih cepat di air daripada di udara 🌊","Es batu mengapung karena lebih ringan daripada air cair 🧊","Jamur lebih dekat kekerabatannya dengan hewan daripada dengan tumbuhan 🍄","Seekor lebah pekerja mengunjungi ratusan bunga dalam sehari 🐝","Air bisa berwujud padat, cair, dan gas di alam: es, air, dan uap 💧"];
+const SRT=[["Rantai makanan",["🌾 Padi","🐛 Ulat","🐦 Burung","🦅 Elang"]],["Siklus air",["Air laut menguap","Uap mengembun jadi awan","Hujan turun","Air mengalir ke laut"]],["Energi senter",["Baterai (kimia)","Listrik","Cahaya"]]];
+const TIPS=["Halo! Aku Robi 🤖 Yuk belajar bareng!","Baca penjelasannya dulu, baru coba quiz ya!","Salah itu tidak apa-apa, dari situ kita belajar 💪","Main game untuk dapat XP tambahan!","Ketuk 🔊 untuk mendengarkan penjelasan!"];
+const LV=[[0,"Pemula 🌱"],[100,"Penjelajah 🧭"],[300,"Ilmuwan 🔬"],[600,"Profesor 🎓"]];
+
+/* ============ STATE (di memori, tanpa localStorage) ============ */
+const NQ=15; // jumlah soal per bab
+const S={read:{},best:{},games:{},fast:0,xp:0,streak:0,bs:0,daily:0};
+let view="home",arg=0,timer=null;
+const $=s=>document.querySelector(s);
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const app=$("#app");
+
+/* ============ UTILITAS ============ */
+function go(v,a=0){clearInterval(timer);try{speechSynthesis.cancel()}catch(e){}view=v;arg=a;render();scrollTo(0,0)}
+function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.append(d);setTimeout(()=>d.remove(),2600)}
+function confetti(){sfx("up");for(let i=0;i<50;i++){const d=document.createElement("i");d.className="cf";d.style.left=Math.random()*100+"vw";d.style.background=["#3fbf86","#5aa5ee","#e8b030","#f27d9c"][i%4];d.style.animationDelay=Math.random()*.6+"s";document.body.append(d);setTimeout(()=>d.remove(),3000)}}
+function earned(){return BADGES.filter(b=>b[3](S)).map(b=>b[1])}
+function award(fn){const b=earned();fn();earned().filter(x=>!b.includes(x)).forEach(x=>toast("🎖️ Lencana baru: "+x))}
+function progress(){let p=0;for(let i=0;i<3;i++){if(S.read[i])p++;if(S.best[i]!=null)p++}return Math.round(p/6*100)}
+function setNav(){$("#xp").textContent="⭐ "+S.xp+" XP";$("#nav").innerHTML=[["home","Beranda"],["games","Game"],["score","Pencapaian"]].map(([v,t])=>`<button class="nv ${view===v?"on":""}" onclick="go('${v}')">${t}</button>`).join("")}
+
+/* ============ TAMPILAN ============ */
+function render(){setNav();({home,chapter,quiz,games,score}[view])()}
+
+function home(){
+ app.innerHTML=`<div class="hero" style="--a:var(--c2)"><div class="em">🔬</div><div><h1>Belajar IPAS jadi seru!</h1><p class="mut" style="margin:0">Pelajari alam, zat, dan energi lewat materi lengkap, quiz, dan game.</p></div></div>
+ <div class="card" style="margin:18px 0"><b>Progres belajarmu: ${progress()}%</b> <span class="mut">• ${lv().n} • ${S.xp} XP</span><div class="bar" style="margin-top:8px"><i style="width:${progress()}%"></i></div></div>
+ <div class="grid">${CH.map((c,i)=>`<button class="card cb" style="--a:${c.c}" onclick="go('chapter',${i})"><div class="em">${c.e}</div><h3 style="margin:.3em 0">Bab ${c.n}</h3><p>${c.t}</p><p class="mut">${S.best[i]!=null?"Skor terbaik: "+S.best[i]+"/"+NQ:"Belum ada quiz"}</p></button>`).join("")}</div>
+ <div class="fact" style="margin-top:18px"><b>🌟 Fakta Seru Hari Ini</b><p id="fk">${FAKTA[new Date().getDate()%FAKTA.length]}</p><button class="btn o" onclick="$('#fk').textContent=FAKTA[Math.floor(Math.random()*FAKTA.length)]">Fakta lain 🎲</button></div>
+ <p><button class="btn" onclick="startQuiz(0,1)">🎯 Tantangan Harian</button><button class="btn o" onclick="go('games')">🎮 Main Game</button></p>`}
+
+function chapter(){
+ const c=CH[arg],X=c.x;if(!S.read[arg])gain(10);S.read[arg]=1;
+ app.style.setProperty("--a",c.c);
+ app.innerHTML=`<div style="--a:${c.c}"><div class="hero"><div class="em">${c.e}</div><div><p class="mut" style="margin:0">Bab ${c.n}</p><h1>${c.t}</h1></div></div>
+ <h2>🎯 Tujuan Pembelajaran</h2><div class="card"><ul style="margin:0;padding-left:20px">${c.goals.map(g=>`<li>${g}</li>`).join("")}</ul></div>
+ <h2>📖 Materi</h2><div class="grid">${c.cards.map(k=>`<div class="card"><div class="em">${k[0]}</div><b>${k[1]}</b><p class="mut">${k[2]}</p></div>`).join("")}</div>
+ <h2>📚 Penjelasan Lengkap</h2>${(c.long||[]).map((x,i)=>`<div class="card art" style="margin-bottom:12px"><h3>${i+1}. ${x[0]} <button class="ic" aria-label="Baca keras" onclick="say(this)">🔊</button></h3><p>${x[1]}</p></div>`).join("")}<h2>🗺️ Diagram</h2><div class="card diag">${X.diag.map(d=>`<div><span>${d[0]}</span><small>${d[1]}</small></div>`).join("<b>→</b>")}</div><h2>🏠 Contoh Sehari-hari</h2><div class="card">${c.ex.map(x=>`<p>• ${x}</p>`).join("")}</div>
+ <h2>💡 Tahukah Kamu?</h2><div class="fact">${[c.fact,...X.facts].map(f=>`<p>✨ ${f}</p>`).join("")}</div>
+ <h2>🧑‍🔬 Coba Sendiri di Rumah</h2><div class="card"><b>${X.exp[0]}</b><p><b>Bahan:</b> ${X.exp[1]}</p><ol>${X.exp[2].map(t=>`<li>${t}</li>`).join("")}</ol><p class="mut">Minta ditemani orang dewasa ya!</p></div>
+ <h2>🤔 Mitos atau Fakta?</h2>${X.myth.map((m,k)=>`<div class="card" style="margin-bottom:10px"><p><b>${m[0]}</b></p><button class="btn o" onclick="mf(${arg},${k},1,this)">Fakta</button><button class="btn o" onclick="mf(${arg},${k},0,this)">Mitos</button><p class="mr mut"></p></div>`).join("")}
+ <p style="margin-top:24px"><button class="btn" onclick="startQuiz(${arg})">📝 Mulai Quiz</button></p>
+ <p>${arg>0?`<button class="btn o" onclick="go('chapter',${arg-1})">← Bab sebelumnya</button>`:""}${arg<2?`<button class="btn o" onclick="go('chapter',${arg+1})">Bab berikutnya →</button>`:""}</p></div>`}
+
+/* ---- Quiz ---- */
+let Q={};
+function startQuiz(i,d){const src=d?sh(CH.flatMap(c=>c.q)).slice(0,3):sh(CH[i].q);Q={ch:d?-1:i,d,l:src.map(q=>({q:q[0],o:sh(q[1].map((t,k)=>[t,k===q[2]])),e:q[3],lv:q[4]})),i:0,s:0,n:src.length};go("quiz",i)}
+function quiz(){
+ const c=CH[Math.max(Q.ch,0)];app.style.setProperty("--a",c.c);
+ if(Q.i>=Q.n){
+  const s=Q.s;award(()=>{if(Q.ch>=0&&(S.best[Q.ch]==null||s>S.best[Q.ch]))S.best[Q.ch]=s;if(Q.d)S.daily=1});
+  if(s==Q.n)confetti();
+  const m=s==Q.n?"Sempurna! Kamu hebat sekali! 🎉":s>=Q.n*.7?"Bagus! Sedikit lagi sempurna 💪":s>=Q.n*.45?"Lumayan! Baca materi lagi ya 📖":"Jangan menyerah, ayo coba lagi! 🌱";
+  app.innerHTML=`<div style="--a:${c.c};text-align:center"><div class="em" style="font-size:3.5rem">${s==Q.n?"🏆":"⭐"}</div><h1>Skor: ${s}/${Q.n}</h1><p>${m}</p><button class="btn" onclick="startQuiz(${Q.ch},${!!Q.d})">🔁 Ulangi</button><button class="btn o" onclick="go('${Q.d?"home":"chapter"}',${Math.max(Q.ch,0)})">Kembali</button></div>`;return}
+ const q=Q.l[Q.i];
+ app.innerHTML=`<div style="--a:${c.c}"><p class="mut">${Q.d?"🎯 Tantangan Harian":"Bab "+c.n} • Soal ${Q.i+1} dari ${Q.n} • ${["","Mudah","Sedang","Sulit"][q.lv]}${S.streak>1?" • 🔥 "+S.streak:""}</p><div class="bar"><i style="width:${Q.i/Q.n*100}%"></i></div>
+ <h2>${q.q}</h2>${q.o.map((o,k)=>`<button class="opt" onclick="ans(${k})">${o[0]}</button>`).join("")}<div id="fb"></div></div>`}
+function ans(k){
+ const q=Q.l[Q.i],b=[...document.querySelectorAll(".opt")];
+ b.forEach((x,j)=>{x.disabled=true;if(q.o[j][1])x.classList.add("ok")});
+ if(q.o[k][1]){Q.s++;hit()}else{b[k].classList.add("no");miss()}
+ $("#fb").innerHTML=`<div class="card" style="margin-top:12px"><b>${q.o[k][1]?"✅ Benar!":"❌ Belum tepat."}</b><p>${q.e}</p><button class="btn" onclick="Q.i++;quiz()">${Q.i==Q.n-1?"Lihat skor":"Lanjut →"}</button></div>`}
+
+/* ---- Game ---- */
+let G="mem",cs=0;
+function games(){
+ app.style.setProperty("--a","var(--c2)");
+ app.innerHTML=`<h1>🎮 Game</h1><div class="tabs">${[["mem","🃏 Memory"],["cls","🧩 Klasifikasi"],["tf","⚡ Tebak Cepat"],["srt","🔢 Susun Urutan"]].map(([k,t])=>`<button class="btn ${G===k?"":"o"}" onclick="G='${k}';games()">${t}</button>`).join("")}</div><div id="gm"></div>`;
+ ({mem:memory,cls:classify,tf:fast,srt:order}[G])()}
+function played(k){gain(25);award(()=>{S.games[k]=1})}
+
+function memory(){
+ let cards=sh(MEM.flatMap((m,i)=>[{k:i,t:m[0]},{k:i,t:m[1]}])),open=[],done=0,mv=0,lock=false;
+ const el=$("#gm");
+ const draw=()=>{el.innerHTML=`<p class="mut">Cocokkan gambar dengan istilahnya. Langkah: ${mv}</p><div class="mem">${cards.map((c,i)=>`<button class="mc ${c.d?"d":open.includes(i)?"f":""}" onclick="flip(${i})" aria-label="kartu ${i+1}">${c.d||open.includes(i)?c.t:"?"}</button>`).join("")}</div>`};
+ window.flip=i=>{if(lock||cards[i].d||open.includes(i))return;open.push(i);draw();
+  if(open.length==2){mv++;const[a,b]=open;
+   if(cards[a].k==cards[b].k){cards[a].d=cards[b].d=1;open=[];done++;draw();if(done==6){played("mem");confetti();toast("Hebat! Selesai dalam "+mv+" langkah 🎉")}}
+   else{lock=true;setTimeout(()=>{open=[];lock=false;draw()},800)}}};
+ draw()}
+
+function classify(){
+ const set=CLS[cs],el=$("#gm");let items=sh(set[2]),sel=null,left=items.length;
+ const draw=()=>{el.innerHTML=`<div class="tabs">${CLS.map((c,i)=>`<button class="btn ${i==cs?"":"o"}" onclick="cs=${i};classify()">${c[0]}</button>`).join("")}</div>
+ <p class="mut">Seret kartu ke kelompok yang benar (di HP: ketuk kartu, lalu ketuk kelompoknya).</p>
+ <div id="pool">${items.map(it=>`<span class="chip" draggable="true" data-k="${it[1]}" data-n="${it[0]}">${it[0]}</span>`).join("")}</div>
+ <div class="grid" style="margin-top:14px">${set[1].map((n,i)=>`<div class="bk" data-b="${i}"><h3>${n}</h3></div>`).join("")}</div>`;
+  const place=(chip,b)=>{if(+chip.dataset.k===+b.dataset.b){chip.draggable=false;chip.style.cursor="default";b.append(chip);sel=null;chip.classList.remove("sel");
+    if(--left==0){played("cls");confetti();toast("Semua benar! 🎉")}}
+   else{chip.classList.add("shake");setTimeout(()=>chip.classList.remove("shake"),300)}};
+  document.querySelectorAll(".chip").forEach(ch=>{
+   ch.ondragstart=e=>e.dataTransfer.setData("t",ch.dataset.n);
+   ch.onclick=()=>{if(!ch.draggable)return;document.querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));sel=ch;ch.classList.add("sel")}});
+  document.querySelectorAll(".bk").forEach(b=>{
+   b.ondragover=e=>e.preventDefault();
+   b.ondrop=e=>{e.preventDefault();const n=e.dataTransfer.getData("t"),ch=[...document.querySelectorAll(".chip")].find(x=>x.dataset.n===n);if(ch&&ch.draggable)place(ch,b)};
+   b.onclick=()=>{if(sel)place(sel,b)}})};
+ draw()}
+
+function fast(){
+ const el=$("#gm");let l=sh(TF),i=0,s=0,t=60;
+ el.innerHTML=`<div class="card"><p>Benar atau salah? Jawab sebanyak mungkin dalam 60 detik!</p><button class="btn" id="go">Mulai</button></div>`;
+ $("#go").onclick=()=>{
+  const draw=()=>{if(i>=l.length){l=sh(TF);i=0}el.innerHTML=`<div class="card"><p class="mut">⏱️ <b id="tm">${t}</b> detik • Skor: <b>${s}</b></p><h2 style="margin-top:0">${l[i][0]}</h2><button class="btn" onclick="tfa(1)">✅ Benar</button><button class="btn" style="background:#c9494a" onclick="tfa(0)">❌ Salah</button></div>`};
+  window.tfa=v=>{if(l[i][1]==v)s++;else s=Math.max(0,s-1);i++;draw()};
+  draw();
+  timer=setInterval(()=>{t--;const e=$("#tm");if(e)e.textContent=t;
+   if(t<=0){clearInterval(timer);gain(s*2);award(()=>{S.games.tf=1;S.fast=Math.max(S.fast,s)});if(s>=10)confetti();
+    el.innerHTML=`<div class="card" style="text-align:center"><div class="em">⏰</div><h2>Waktu habis! Skor: ${s}</h2><p>Rekor terbaikmu: ${S.fast}</p><button class="btn" onclick="fast()">Main lagi</button></div>`}},1000)}}
+
+/* ---- Pencapaian ---- */
+function score(){
+ app.style.setProperty("--a","var(--c1)");
+ app.innerHTML=`<h1>🏅 Pencapaian</h1><div class="card"><b>Progres: ${progress()}%</b><div class="bar" style="margin-top:8px"><i style="width:${progress()}%"></i></div></div>
+ <div class="card" style="margin-top:14px"><b>${lv().n}</b> • ${S.xp} XP${lv().nx?" • "+(lv().nx-S.xp)+" XP lagi ke level berikutnya":" • Level tertinggi!"}<br><span class="mut">Beruntun terbaik: ${S.bs} 🔥</span></div><h2>Skor Quiz</h2><div class="grid">${CH.map((c,i)=>`<div class="card"><div class="em">${c.e}</div><b>Bab ${c.n}</b><p class="mut">${S.best[i]!=null?S.best[i]+"/"+NQ:"Belum dikerjakan"}</p></div>`).join("")}</div>
+ <h2>Lencana</h2><div class="grid">${BADGES.map(b=>`<div class="card badge ${b[3](S)?"on":""}"><div class="em">${b[0]}</div><b>${b[1]}</b><p class="mut">${b[2]}</p></div>`).join("")}</div>`}
+
+/* ---- Fitur seru: suara, XP, maskot, baca keras, mitos, game urutan ---- */
+let mute=false,AC;
+function sfx(t){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const f={ok:[660,880],no:[220],up:[523,659,784,1047]}[t],n=AC.currentTime;f.forEach((hz,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=hz;g.gain.setValueAtTime(.12,n+i*.12);g.gain.exponentialRampToValueAtTime(.001,n+i*.12+.2);o.connect(g);g.connect(AC.destination);o.start(n+i*.12);o.stop(n+i*.12+.22)})}catch(e){}}
+function lv(){let i=0;LV.forEach((l,k)=>{if(S.xp>=l[0])i=k});return{n:LV[i][1],i,nx:LV[i+1]?LV[i+1][0]:null}}
+function gain(n){const b=lv().i;S.xp+=n;if(lv().i>b){confetti();toast("🎉 Naik level: "+lv().n);mas("Kamu naik level jadi "+lv().n+"!")}$("#xp").textContent="⭐ "+S.xp+" XP"}
+function mas(m){const b=$("#mb");b.textContent=m||TIPS[Math.floor(Math.random()*TIPS.length)];b.hidden=false;clearTimeout(mas.t);mas.t=setTimeout(()=>b.hidden=true,3500)}
+function hit(){S.streak++;S.bs=Math.max(S.bs,S.streak);sfx("ok");gain(10+(S.streak>=3?5:0));if(S.streak>=3){toast("🔥 Beruntun "+S.streak+"x!");mas("Hebat! "+S.streak+" benar berturut-turut!")}}
+function miss(){S.streak=0;sfx("no");mas("Tidak apa-apa, baca penjelasannya lalu coba lagi 💪")}
+function say(b){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(b.closest(".card").querySelector("p").textContent);u.lang="id-ID";u.rate=.95;speechSynthesis.speak(u)}
+function mf(ci,k,v,b){const m=CH[ci].x.myth[k],ok=(m[1]?1:0)===v;ok?(sfx("ok"),gain(5)):sfx("no");const c=b.closest(".card");c.querySelector(".mr").innerHTML=(ok?"✅ Betul! ":"❌ Belum tepat. ")+"Ini adalah <b>"+(m[1]?"fakta":"mitos")+"</b>. "+m[2];c.querySelectorAll("button").forEach(x=>x.disabled=true)}
+let si=0;
+function order(){const el=$("#gm"),key=SRT[si][1];let n=0;
+ el.innerHTML=`<div class="tabs">${SRT.map((c,i)=>`<button class="btn ${i==si?"":"o"}" onclick="si=${i};order()">${c[0]}</button>`).join("")}</div><p class="mut">Ketuk kartu sesuai urutan yang benar, dari awal sampai akhir.</p><div id="ol" class="card" style="min-height:70px"></div><div id="pl">${sh(key).map(c=>`<button class="chip">${c}</button>`).join("")}</div>`;
+ document.querySelectorAll("#pl .chip").forEach(b=>b.onclick=()=>{const t=b.textContent;
+  if(t===key[n]){n++;$("#ol").insertAdjacentHTML("beforeend",`<span class="chip" style="cursor:default">${n}. ${t}</span>`);b.remove();sfx("ok");if(n==key.length){played("srt");confetti();toast("Urutan benar! 🎉")}}
+  else{b.classList.add("shake");sfx("no");setTimeout(()=>b.classList.remove("shake"),300)}})}
+$("#sd").onclick=()=>{mute=!mute;$("#sd").textContent=mute?"🔇":"🔊"};
+setTimeout(()=>mas(TIPS[0]),900);
+/* ---- Tema ---- */
+$("#tg").onclick=()=>{const r=document.documentElement,d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"};
+render();
+</script>
+</body>
+</html>
